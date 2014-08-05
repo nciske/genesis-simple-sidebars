@@ -100,13 +100,24 @@ function ss_register_sidebars() {
 
 	//* Cycle through created sidebars, register them as widget areas
 	foreach ( (array) $_sidebars as $id => $info ) {
-
-		genesis_register_sidebar( array(
-			'name'        => esc_html( $info['name'] ),
-			'id'          => $id,
-			'description' => esc_html( $info['description'] ),
-			'editable'    => 1,
-		) );
+		
+		$name = '';
+		$description = '';
+		
+		if( isset( $info['name'] ) )
+			$name = $info['name'];
+			
+		if( isset( $info['description'] ) )
+			$description = $info['description'];
+		
+		if( $name ){
+			genesis_register_sidebar( array(
+				'name'        => esc_html( $name ),
+				'id'          => $id,
+				'description' => esc_html( $description ),
+				'editable'    => 1,
+			) );
+		}
 
 	}
 
